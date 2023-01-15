@@ -1,5 +1,4 @@
-import { BrowserRouter } from "react-router-dom"
-import { MovieProvider } from "./context/MovieContext";
+import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./routes"
 import { GlobalStyle } from "./styles/GlobalStyle";
 

@@ -17,3 +17,4 @@ export interface MovieTypeOMDBApi {
     Director: string;
     Poster: string;
 }
+

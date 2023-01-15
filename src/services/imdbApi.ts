@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MovieList, MovieType, MovieTypeOMDBApi, YoutubeTrailerType } from "../@types/movieList";
+import { MovieList } from "../@types/movieList";
 
 
 const IMDB_API_KEY = "k_p17fx57h";
@@ -15,7 +15,7 @@ const getMovies = (title: string)=> {
 };
 
 const getYoutbeTrailer = (movieId: string | undefined) => {
-    return imdbApi.get<YoutubeTrailerType>
+    return imdbApi.get<{ videoUrl: string }>
     (`/en/API/YouTubeTrailer/${IMDB_API_KEY}/${movieId}`)
 }
 

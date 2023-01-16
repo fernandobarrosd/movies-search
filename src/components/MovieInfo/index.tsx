@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MovieTypeOMDBApi } from "../../@types/movieList";
+import { useMovieOMDBApi } from "../../hooks/useMovieOMDBApi";
 import { ImdbService } from "../../services/imdbApi";
 import { Button } from "../Button";
 import { ButtonLink } from "../ButtonLink";
@@ -8,13 +9,11 @@ import { Container, ImageContainer, Title, Album,
 Info, Description } 
 from "./style";
 
-interface MovieInfoProps {
-    movie: MovieTypeOMDBApi;
-}
 
-export const MovieInfo = ({ movie } : MovieInfoProps) => {
+export const MovieInfo = () => {
    const [ youtubeTrailerUrl, setYoutubeTrailerUrl ] = 
    useState("");
+   const { movieOMDBApi: movie } = useMovieOMDBApi();
    const { id } = useParams<{ id: string }>();
    
 

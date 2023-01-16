@@ -1,36 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Header } from "../../components/Header"
 import { MovieInfo } from "../../components/MovieInfo";
-import { Main, MovieInfoSection } 
-from "./style";
-import { MovieTypeOMDBApi } from "../../@types/movieList";
+import { Main, MovieInfoSection } from "./style";
 import { omdbApiService } from "../../services/omdbApi";
+import { Layout } from "../../components/Layout";
+import { useMovieOMDBApi } from "../../hooks/useMovieOMDBApi";
+
+
 export const Movie = () => {
-    const { title, id } = useParams<{title: string, id: string}>();
-    const [ movie, setMovie ] = useState<MovieTypeOMDBApi>({} as MovieTypeOMDBApi);
+    const { title } = useParams<{title: string }>();
+   const { setMovieOMDBApi: setMovie } = useMovieOMDBApi();
+   
 
-    const fetchData = async () => {
-        try {
-            const response = await 
-            omdbApiService.getMovie(title);
-
-            setMovie(response.data);
-        } catch (error) {
-            
-        }
-    }
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await 
+                omdbApiService.getMovie(title);
+    
+                setMovie(response.data);
+
+                
+            } catch (error) {
+                
+            }
+        }
+
         fetchData();
     }, [])
     return (
         <>
-            <Header/>
-            <Main>
-                <MovieInfoSection>
-                    <MovieInfo movie={movie}/>
-                </MovieInfoSection>
-            </Main>
+            <Layout>
+                <Main>
+                    <MovieInfoSection>
+                        <MovieInfo/>
+                    </MovieInfoSection>
+                </Main>
+            </Layout>
         </>
         
     )

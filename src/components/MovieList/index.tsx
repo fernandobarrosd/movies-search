@@ -1,12 +1,11 @@
-import { MovieTypeIMDBApi } from "../../@types/movieList";
+import { useMovieIMDBApi } from "../../hooks/useMovieIMDBApi";
 import { MovieCard } from "../MovieCard";
 import { Container, List } from "./style";
 
-interface MovieListProps {
-    movies: MovieTypeIMDBApi[];
-}
 
-export const MovieList = ({ movies } : MovieListProps) => {
+
+export const MovieList = () => {
+    const { movieList: movies } = useMovieIMDBApi();
     return (
         <Container>
             <h2>Movies</h2>

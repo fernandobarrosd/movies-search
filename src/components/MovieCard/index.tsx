@@ -1,16 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { MovieTypeIMDBApi } from "../../@types/movieList"
+import { useMovieIMDBApi } from "../../hooks/useMovieIMDBApi";
 import { Button } from "../Button"
 import { Album, Container, ImageContainer, Title, Year } 
 from "./style"
 
 
-interface MovieCardProps {
-    movie: MovieTypeIMDBApi;
-}
 
 
-export const MovieCard = ({ movie: { id, title, description, image } } : MovieCardProps) => {
+export const MovieCard = () => {
+    const { movieIMDBApi: { description, image, title, id } } = useMovieIMDBApi();
     const navigate = useNavigate();
     return (
         <>

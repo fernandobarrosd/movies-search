@@ -1,15 +1,15 @@
 import { FormEvent, useState } from "react";
-import { MovieTypeIMDBApi } from "../../@types/movieList";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { FormContainer, FormSection, Main } from "./style";
 import { ImdbService } from "../../services/imdbApi";
 import { MovieList } from "../MovieList";
+import { useMovieIMDBApi } from "../../hooks/useMovieIMDBApi";
 
 export const Form = () => {
    const [ title, setTitle ] = useState("");
-    const [ movieList, setMovieList ] = useState<MovieTypeIMDBApi[]>([]);
-    const [ isLoading, setIsLoading ] = useState(false);
+   const { setMovieList, movieList } = useMovieIMDBApi();
+   const [ isLoading, setIsLoading ] = useState(false);
     
 
     const handleSearch = async (e : FormEvent) => {
@@ -44,7 +44,7 @@ export const Form = () => {
             { isLoading ? <p>Carregando...</p> : 
             movieList.length === 0 ? 
             <p>Nenhum resultado</p> : 
-            <MovieList movies={movieList}/> }
+            <MovieList/>}
             </FormSection>
         </Main>
     )
